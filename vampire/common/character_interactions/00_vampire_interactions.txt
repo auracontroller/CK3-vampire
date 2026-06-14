@@ -1,0 +1,37 @@
+create_ghoul_interaction = {
+    category = interaction_category_diplomacy
+    desc = create_ghoul_interaction_desc
+    
+    # The engine checks these conditions before even showing you the button
+    is_shown = {
+        scope:actor = { 
+            has_trait = vampire 
+        }
+        scope:recipient = { 
+            is_alive = yes 
+            NOT = { has_trait = ghoul }
+            NOT = { has_trait = vampire }
+        }
+    }
+    
+    # The engine checks this condition to determine if the button is clickable
+    is_valid = {
+        scope:recipient = {
+            target_is_in_realm_or_court_of = scope:actor
+        }
+    }
+
+    # Bypassing AI logic entirely
+    auto_accept = yes
+
+    # The synchronous execution of the variables
+    on_accept = {
+        scope:recipient = {
+            add_trait = ghoul
+            add_opinion_modifier = {
+                modifier = ghoul_loyalty_modifier
+                target = scope:actor
+            }
+        }
+    }
+}

@@ -1,0 +1,3 @@
+ghoul_loyalty_modifier = {
+    opinion = 300
+}

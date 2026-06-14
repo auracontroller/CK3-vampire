@@ -1,0 +1,14 @@
+ghoul = {
+    name = trait_ghoul
+    
+    # The Stat Anchors (25% Multipliers)
+    diplomacy_mult = 0.25
+    martial_mult = 0.25
+    stewardship_mult = 0.25
+    intrigue_mult = 0.25
+    learning_mult = 0.25
+    prowess_mult = 0.25
+
+    # A baseline health bump to keep them structurally sound until the 15-day healing pulse fires
+    health = 1.0
+}
