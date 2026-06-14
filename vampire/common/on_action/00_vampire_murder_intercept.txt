@@ -1,0 +1,20 @@
+on_scheme_success = {
+	effect = {
+		# Strictly isolate to the murder scheme array
+		if = {
+			limit = {
+				# Clears the romance/seduction regression loop entirely
+				scope:scheme.scheme_type = murder
+				scope:target = { has_trait = vampire }
+			}
+			# Intercept the outcome before the murder finale script processes the death flag
+			scope:target = {
+				add_trait = wounded_3
+			}
+			# Force-fail or cleanly terminate the murder execution block safely
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}
+	}
+}

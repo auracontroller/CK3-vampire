@@ -1,0 +1,54 @@
+namespace = vampire_ghoul
+
+# Scheduled 60 days after feeding/creation to give need_blood
+vampire_ghoul.001 = {
+    type = character_event
+    hidden = yes
+
+    trigger = {
+        has_trait = ghoul
+        NOT = { has_trait = need_blood }
+    }
+
+    immediate = {
+        add_trait = need_blood
+
+        # Schedule the starvation check for 30 days later
+        trigger_event = {
+            id = vampire_ghoul.002
+            days = 30
+        }
+    }
+}
+
+# Scheduled 30 days after gaining need_blood to strip traits if not fed
+vampire_ghoul.002 = {
+    type = character_event
+    hidden = yes
+
+    trigger = {
+        has_trait = ghoul
+        has_trait = need_blood
+    }
+
+    immediate = {
+        remove_trait = ghoul
+        remove_trait = need_blood
+        # Any other supernatural benefits cleanup can go here if needed later
+    }
+}
+
+# Guaranteed scar removal for vampires (30 days after Healing Decision)
+vampire_ghoul.003 = {
+    type = character_event
+    hidden = yes
+
+    trigger = {
+        has_trait = vampire
+        has_trait = scars
+    }
+
+    immediate = {
+        remove_trait = scars
+    }
+}
