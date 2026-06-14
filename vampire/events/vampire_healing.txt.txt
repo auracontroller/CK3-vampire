@@ -1,0 +1,25 @@
+namespace = vampire
+
+vampire.0001 = {
+    type = character_event
+    hidden = yes
+
+    # The engine scans the cache for these exact conditions
+    trigger = {
+        has_trait = vampire
+        OR = {
+            has_trait = wounded_1
+            has_trait = wounded_2
+            has_trait = wounded_3
+            has_trait = maimed
+        }
+    }
+
+    # If the conditions are met, immediately strip the negative quanta
+    immediate = {
+        remove_trait = wounded_1
+        remove_trait = wounded_2
+        remove_trait = wounded_3
+        remove_trait = maimed
+    }
+}

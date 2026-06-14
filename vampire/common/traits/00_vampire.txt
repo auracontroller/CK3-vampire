@@ -1,0 +1,23 @@
+vampire = {
+    name = trait_vampire
+    
+    # The Core Identity Flags
+    immortal = yes
+    genetic = no
+
+    # The Biological Truncation
+    fertility = -1.0
+
+    # The Stat Anchors
+    diplomacy_mult = 0.5
+    martial_mult = 0.5
+    stewardship_mult = 0.5
+    intrigue_mult = 0.5
+    learning_mult = 0.5
+    prowess_mult = 0.5
+portrait_modifier = {
+        muscle = -1.0
+    }
+flag = blocks_getting_non_epidemic_disease
+    epidemic_resistance = 100
+}

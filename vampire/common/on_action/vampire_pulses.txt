@@ -1,0 +1,5 @@
+on_monthly_character_pulse = {
+    events = {
+        vampire.0001
+    }
+}
