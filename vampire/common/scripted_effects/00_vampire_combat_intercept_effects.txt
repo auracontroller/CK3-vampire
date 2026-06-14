@@ -1,0 +1,16 @@
+# Overriding the vanilla combat death script injection point
+death_in_combat_effect = {
+	if = {
+		limit = { has_trait = vampire }
+		# Intercept before the hardcoded 'die' command is issued
+		add_trait = maimed
+		send_interface_toast = {
+			title = vampire_survived_combat_title
+			text = vampire_survived_combat_desc
+		}
+	}
+	else = {
+		# Fallback to standard vanilla execution sequence
+		execute_death_combat_effect = yes
+	}
+}

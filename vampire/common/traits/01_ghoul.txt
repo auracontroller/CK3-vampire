@@ -11,4 +11,22 @@ ghoul = {
 
     # A baseline health bump to keep them structurally sound until the 15-day healing pulse fires
     health = 1.0
+
+    # Lifespan
+    years_of_life_expectancy = 15
+
+    # Opinion towards Vampires
+    trait_vampire_opinion = 300
+}
+
+need_blood = {
+    name = trait_need_blood
+
+    # Starvation Stat Penalty
+    diplomacy_mult = -0.15
+    martial_mult = -0.15
+    stewardship_mult = -0.15
+    intrigue_mult = -0.15
+    learning_mult = -0.15
+    prowess_mult = -0.15
 }

@@ -1,0 +1,45 @@
+vampire_heal_self_decision = {
+    picture = "gfx/interface/illustrations/decisions/decision_blood.dds" # Assuming a default or placeholder
+    major = yes
+    desc = vampire_heal_self_decision_desc
+    selection_tooltip = vampire_heal_self_decision_tooltip
+
+    is_shown = {
+        has_trait = vampire
+    }
+
+    is_valid = {
+        is_alive = yes
+    }
+
+    cooldown = { days = 30 }
+
+    effect = {
+        # Strip all standard illness and injury traits
+        every_held_trait = {
+            limit = {
+                is_health_trait = yes
+                NOT = { has_trait_tag = permanent_injury }
+                # Note: For vampire heal, scars are temporarily excluded from instant removal,
+                # but handled by the delayed event below if present.
+                NOT = { this = trait:scars }
+            }
+            remove_trait = this
+        }
+
+        # If the character has a scar, schedule guaranteed removal for 30 days later
+        if = {
+            limit = {
+                has_trait = scars
+            }
+            trigger_event = {
+                id = vampire_ghoul.003
+                days = 30
+            }
+        }
+    }
+
+    ai_will_do = {
+        base = 100
+    }
+}

@@ -15,9 +15,14 @@ vampire = {
     intrigue_mult = 0.5
     learning_mult = 0.5
     prowess_mult = 0.5
-portrait_modifier = {
+
+    # Opinion modifiers
+    same_trait_opinion = 50
+
+    portrait_modifier = {
         muscle = -1.0
     }
-flag = blocks_getting_non_epidemic_disease
+
+    flag = blocks_getting_non_epidemic_disease
     epidemic_resistance = 100
 }

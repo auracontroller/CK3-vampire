@@ -17,7 +17,10 @@ create_ghoul_interaction = {
     # The engine checks this condition to determine if the button is clickable
     is_valid = {
         scope:recipient = {
-            target_is_in_realm_or_court_of = scope:actor
+            OR = {
+                is_in_realm_of = scope:actor
+                is_courtier_of = scope:actor
+            }
         }
     }
 
@@ -30,6 +33,156 @@ create_ghoul_interaction = {
             add_trait = ghoul
             add_opinion_modifier = {
                 modifier = ghoul_loyalty_modifier
+                target = scope:actor
+            }
+            # Start the hunger cycle
+            trigger_event = {
+                id = vampire_ghoul.001
+                days = 60
+            }
+        }
+    }
+}
+
+ghoul_acquire_blood_interaction = {
+    category = interaction_category_diplomacy
+    desc = ghoul_acquire_blood_interaction_desc
+
+    is_shown = {
+        scope:actor = {
+            has_trait = ghoul
+            has_trait = need_blood
+        }
+        scope:recipient = {
+            has_trait = vampire
+        }
+    }
+
+    is_valid = {
+        scope:recipient = {
+            OR = {
+                is_in_realm_of = scope:actor
+                is_courtier_of = scope:actor
+            }
+        }
+    }
+
+    auto_accept = yes
+
+    ai_will_do = {
+        base = 0
+        modifier = {
+            add = 1000
+            scope:actor = { has_trait = need_blood }
+        }
+    }
+
+    on_accept = {
+        scope:actor = {
+            remove_trait = need_blood
+
+            # Restart the hunger cycle
+            trigger_event = {
+                id = vampire_ghoul.001
+                days = 60
+            }
+
+            # Strip all standard illness and injury traits except scars
+            every_held_trait = {
+                limit = {
+                    is_health_trait = yes
+                    NOT = { has_trait_tag = permanent_injury }
+                    NOT = { this = trait:scars }
+                }
+                remove_trait = this
+            }
+        }
+    }
+}
+
+vampire_embrace_interaction = {
+    category = interaction_category_diplomacy
+    desc = vampire_embrace_interaction_desc
+
+    is_shown = {
+        scope:actor = {
+            has_trait = vampire
+        }
+        scope:recipient = {
+            is_alive = yes
+            NOT = { has_trait = vampire }
+        }
+    }
+
+    is_valid = {
+        scope:recipient = {
+            OR = {
+                is_in_realm_of = scope:actor
+                is_courtier_of = scope:actor
+            }
+        }
+    }
+
+    auto_accept = yes
+
+    on_accept = {
+        scope:recipient = {
+            remove_trait = ghoul
+            remove_trait = need_blood
+            add_trait = vampire
+            add_relation = {
+                type = vampire_sire
+                target = scope:actor
+            }
+        }
+        scope:actor = {
+            add_relation = {
+                type = vampire_childe
+                target = scope:recipient
+            }
+        }
+    }
+}
+
+request_vampire_embrace_interaction = {
+    category = interaction_category_diplomacy
+    desc = request_vampire_embrace_interaction_desc
+
+    is_shown = {
+        scope:actor = {
+            is_alive = yes
+            NOT = { has_trait = vampire }
+        }
+        scope:recipient = {
+            has_trait = vampire
+        }
+    }
+
+    is_valid = {
+        scope:recipient = {
+            OR = {
+                is_in_realm_of = scope:actor
+                is_courtier_of = scope:actor
+            }
+        }
+    }
+
+    # Bypassing AI acceptance logic for simplicity, though AI might need custom acceptance in full mod
+    auto_accept = yes
+
+    on_accept = {
+        scope:actor = {
+            remove_trait = ghoul
+            remove_trait = need_blood
+            add_trait = vampire
+            add_relation = {
+                type = vampire_sire
+                target = scope:recipient
+            }
+        }
+        scope:recipient = {
+            add_relation = {
+                type = vampire_childe
                 target = scope:actor
             }
         }
