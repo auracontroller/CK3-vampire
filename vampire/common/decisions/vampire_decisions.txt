@@ -39,7 +39,10 @@ vampire_heal_self_decision = {
         # If the character has a scar, schedule guaranteed removal for 30 days later
         if = {
             limit = {
-                has_trait = scars
+                OR = {
+                    has_trait = scarred
+                    has_trait = severe_scarred
+                }
             }
             trigger_event = {
                 id = vampire_ghoul.003

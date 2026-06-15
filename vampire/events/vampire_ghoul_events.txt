@@ -45,10 +45,14 @@ vampire_ghoul.003 = {
 
     trigger = {
         has_trait = vampire
-        has_trait = scars
+        OR = {
+            has_trait = scarred
+            has_trait = severe_scarred
+        }
     }
 
     immediate = {
-        remove_trait = scars
+        remove_trait = scarred
+        remove_trait = severe_scarred
     }
 }
