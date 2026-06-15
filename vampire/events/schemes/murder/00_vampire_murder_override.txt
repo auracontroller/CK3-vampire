@@ -1,0 +1,32 @@
+namespace = murder_outcome_events
+
+murder_outcome_events.1001 = {
+    type = character_event
+    hidden = yes
+
+    trigger = {
+        is_alive = yes
+    }
+
+    immediate = {
+        if = {
+            limit = {
+                scope:target = {
+                    has_trait = vampire
+                }
+            }
+            # Intercept death before the death command and apply severe wound
+            scope:target = {
+                add_trait = wounded_3
+            }
+        }
+        else = {
+            # Standard death logic executes for normal targets
+            scope:target = {
+                death = {
+                    death_reason = death_murder
+                }
+            }
+        }
+    }
+}

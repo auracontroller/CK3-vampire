@@ -11,6 +11,9 @@ death_in_combat_effect = {
 	}
 	else = {
 		# Fallback to standard vanilla execution sequence
-		execute_death_combat_effect = yes
+		death = {
+			death_reason = death_battle
+			killer = scope:killer
+		}
 	}
 }

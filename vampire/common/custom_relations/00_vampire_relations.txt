@@ -1,9 +1,7 @@
 vampire_sire = {
     desc = custom_relation_vampire_sire
 
-    opinion = {
-        value = 300
-    }
+    opinion = 300
 }
 
 vampire_childe = {

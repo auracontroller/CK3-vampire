@@ -15,17 +15,26 @@ vampire_heal_self_decision = {
     cooldown = { days = 30 }
 
     effect = {
-        # Strip all standard illness and injury traits
-        every_held_trait = {
-            limit = {
-                is_health_trait = yes
-                NOT = { has_trait_tag = permanent_injury }
-                # Note: For vampire heal, scars are temporarily excluded from instant removal,
-                # but handled by the delayed event below if present.
-                NOT = { this = trait:scars }
-            }
-            remove_trait = this
-        }
+        # Strip all standard illness and injury traits explicitly
+        remove_trait = ill
+        remove_trait = wounded_1
+        remove_trait = wounded_2
+        remove_trait = wounded_3
+        remove_trait = maimed
+        remove_trait = ill_pneumonia
+        remove_trait = ill_typhus
+        remove_trait = ill_consumption
+        remove_trait = ill_cancer
+        remove_trait = ill_gout
+        remove_trait = ill_leprosy
+        remove_trait = ill_lovers_pox
+        remove_trait = ill_bubonic_plague
+        remove_trait = ill_smallpox
+        remove_trait = ill_great_pox
+        remove_trait = ill_measles
+        remove_trait = ill_dysentery
+        remove_trait = ill_ergotism
+        remove_trait = ill_dancing_plague
 
         # If the character has a scar, schedule guaranteed removal for 30 days later
         if = {
